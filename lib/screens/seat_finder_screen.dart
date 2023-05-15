@@ -69,7 +69,7 @@ class _SeatFinderScreenState extends State<SeatFinderScreen> {
   TextField textField() {
     return
       TextField(
-              style: TextStyle(color: Colors.lightBlue),
+              style: TextStyle(color: Colors.lightBlueAccent),
               controller: _seatNoController,
               decoration: InputDecoration(
                 hintText: "Enter Seat Number...",
@@ -86,7 +86,7 @@ class _SeatFinderScreenState extends State<SeatFinderScreen> {
                 ),
                 suffixIcon: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _seatNoController.text.isNotEmpty? Colors.lightBlueAccent:Colors.grey,
+                    backgroundColor: _seatNoController.text.isNotEmpty? Color(0xff80cbff):Colors.grey,
                       padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -132,18 +132,32 @@ class _SeatFinderScreenState extends State<SeatFinderScreen> {
                           itemBuilder: (context,index){
                             final _isSelected=_isSelectedIndexes.contains(index);
                             var seat = allSeats[index];
-                            return Row(
-
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                customSeatWidget(3,true),
-                                Spacer(),
-                                customSeatWidget(1,false),
+                                Row(
+                                  children: [
+                                    customSeatWidget(3,false),
+                                    Spacer(),
+                                    customSeatWidget(1,false),
+                                  ],
+                                ),
+
+                                Row(
+                                  children: [
+                                    customSeatWidget(3,true),
+                                    Spacer(),
+                                    customSeatWidget(1,true),
+                                  ],
+                                ),
+                               
 
 
 
 
 
                               ],
+
                             );
                           }),
          ),
@@ -186,144 +200,159 @@ class _SeatFinderScreenState extends State<SeatFinderScreen> {
 
   customSeatWidget(int numberSeats,bool isReverted){
     return
-     numberSeats==3? Container(
-        height: 84,
-        width: 273,
-        child: CustomPaint(
-            painter: RoundedRectanglePainter(),
-            child: isReverted==false?Stack(
-              clipBehavior: Clip.none,
-              children:[
-               Positioned(
-                  top: 35,
-                  left: 23,
-                  child: Container(
-                    height: 48,
-                    width: 51,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: Colors.red
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("1"),
-                        Text("Lower")
-                      ],
+     Column(
+       children: [
+     numberSeats==3 && isReverted==false ?
+     Container(
+          height: 84,
+          width: 273,
+          child: CustomPaint(
+              painter: RoundedRectanglePainter(),
+              child:  Stack(
+                clipBehavior: Clip.none,
+                children:[
+                 Positioned(
+                    top: 35,
+                    left: 23,
+                    child: Container(
+                      height: 48,
+                      width: 51,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: Colors.red
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("1"),
+                          Text("Lower")
+                        ],
+                      ),
                     ),
                   ),
-                ),
-            Positioned(
-              top: 35,
-              left: 77,
-              child: Container(
-                height: 48,
-                width: 51,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    color: Colors.red
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("1"),
-                    Text("Lower")
-                  ],
+              Positioned(
+                top: 35,
+                left: 77,
+                child: Container(
+                  height: 48,
+                  width: 51,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: Colors.red
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("1"),
+                      Text("Lower")
+                    ],
+                  ),
                 ),
               ),
-            ),
-                Positioned(
-                  top: 35,
-                  left: 135,
-                  child: Container(
-                    height: 48,
-                    width: 51,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: Colors.red
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("1",style: TextStyle(fontSize: 18),),
-                        Text("Lower")
-                      ],
-                    ),
-                  ),
-                ),
-
-
-
-              ],
-            ):
-            Stack(
-              clipBehavior: Clip.none,
-              children:[
-                Positioned(
-                  top: 4,
-                  left: 23,
-                  child: Container(
-                    height: 52,
-                    width: 57,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: Colors.red
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("1"),
-                        Text("Lower")
-                      ],
+                  Positioned(
+                    top: 35,
+                    left: 135,
+                    child: Container(
+                      height: 48,
+                      width: 51,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: Colors.red
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("1",style: TextStyle(fontSize: 18),),
+                          Text("Lower")
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 4,
-                  left: 81,
-                  child: Container(
-                    height: 52,
-                    width: 57,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: Colors.red
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("1"),
-                        Text("Lower")
-                      ],
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 4,
-                  left: 139,
-                  child: Container(
-                    height: 52,
-                    width: 57,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: Colors.red
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("1"),
-                        Text("Lower")
-                      ],
-                    ),
-                  ),
-                ),
 
 
-              ],
-            )
 
-        ),
+                ],
+              )
 
-      ):Container(
+          ),
+       ):
+
+   numberSeats==3 && isReverted==true?
+    Container(  //true
+       height: 84,
+       width: 273,
+       child: CustomPaint(
+           painter: RoundedRectanglePainter(),
+           child: Stack(
+             clipBehavior: Clip.none,
+             children:[
+               Positioned(
+                 top: 4,
+                 left: 23,
+                 child: Container(
+                   height: 52,
+                   width: 57,
+                   decoration: BoxDecoration(
+                       borderRadius: BorderRadius.circular(2),
+                       color: Colors.red
+                   ),
+                   child: Column(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       Text("1"),
+                       Text("Lower")
+                     ],
+                   ),
+                 ),
+               ),
+               Positioned(
+                 top: 4,
+                 left: 81,
+                 child: Container(
+                   height: 52,
+                   width: 57,
+                   decoration: BoxDecoration(
+                       borderRadius: BorderRadius.circular(2),
+                       color: Colors.red
+                   ),
+                   child: Column(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       Text("1"),
+                       Text("Lower")
+                     ],
+                   ),
+                 ),
+               ),
+               Positioned(
+                 top: 4,
+                 left: 139,
+                 child: Container(
+                   height: 52,
+                   width: 57,
+                   decoration: BoxDecoration(
+                       borderRadius: BorderRadius.circular(2),
+                       color: Color(0xffceeaff)
+                   ),
+                   child: Column(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       Text("1",style: TextStyle(color: Color(0xff2e82d3),fontSize: 22),),
+                       Text("Lower",style: TextStyle(color: Color(0xff67a2e2)),)
+                     ],
+                   ),
+                 ),
+               ),
+
+
+             ],
+           )
+
+       ),
+
+     ) :
+       numberSeats==1 && isReverted==false?
+   Container(
        height: 84,
        width: 108,
        child: CustomPaint(
@@ -346,7 +375,7 @@ class _SeatFinderScreenState extends State<SeatFinderScreen> {
                      mainAxisAlignment: MainAxisAlignment.center,
                      children: [
                        Text("1"),
-                       Text("Lower")
+                       Text("Upper")
                      ],
                    ),
                  ),
@@ -358,7 +387,45 @@ class _SeatFinderScreenState extends State<SeatFinderScreen> {
            )
 
        ),
+     ):
+       Container(
+         height: 84,
+         width: 108,
+         child: CustomPaint(
+             painter: RoundedRectanglePainter(),
+             child: Stack(
+               clipBehavior: Clip.none,
+               children:[
 
+                 Positioned(
+                   top: 5,
+                   left: 22,
+                   child: Container(
+                     height: 48,
+                     width: 55,
+                     decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(2),
+                         color: Colors.red
+                     ),
+                     child: Column(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                         Text("1"),
+                         Text("Upper")
+                       ],
+                     ),
+                   ),
+                 ),
+
+
+
+               ],
+             )
+
+         ),
+       )
+
+       ]
      );
 
   }
@@ -386,7 +453,7 @@ class RoundedRectanglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint=Paint()
-    ..color=Colors.lightBlue
+    ..color=Color(0xff80CBFF)
     ..strokeWidth=10
     ..style=PaintingStyle.fill;
     final a=Offset(15, size.height* 1/4);
